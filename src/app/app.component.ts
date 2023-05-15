@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   name = 'Some name';
-  myNumber = 12345;
+  myNumberTest = 12345;
 }
