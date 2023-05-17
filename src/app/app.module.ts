@@ -6,6 +6,8 @@ import { HelloComponent } from './hello/hello.component';
 import { TapCounterComponent } from './tap-counter/tap-counter.component';
 import { DealerInventoryComponent } from './dealer-inventory/dealer-inventory.component';
 import { PhotoGalleryComponent } from './photo-gallery/photo-gallery.component';
+import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,10 +15,12 @@ import { PhotoGalleryComponent } from './photo-gallery/photo-gallery.component';
     HelloComponent,
     TapCounterComponent,
     DealerInventoryComponent,
-    PhotoGalleryComponent
+    PhotoGalleryComponent,
+    VehicleFormComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -63,5 +63,11 @@ export class DealerInventoryComponent implements OnInit {
     //throw new Error('Method not implemented.');
   }
 
+  handlePhotoNavigation(photoIndex:number, car:Vehicle) {
+    if (photoIndex == car.photos.length - 1) {
+      alert("Come visit us in our showroom!")
+    }
+  }
+
   
 }
