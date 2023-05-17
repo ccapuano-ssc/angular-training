@@ -1,5 +1,8 @@
 <h1>Current Inventory</h1>
 <p *ngIf="inventory.length==0">There are no cars in inventory.</p>
+
+<app-vehicle-form (on-submit)="addVehicle($event)"></app-vehicle-form>
+
 <div *ngFor="let car of inventory; trackBy: trackByVIN" 
     [ngClass]="{'featured-item': car.featured}">
     <h3>{{car.year}} {{car.make}}, {{car.model}}</h3>
@@ -12,7 +15,15 @@
     <p *ngIf="car.featured">Featured car of the month!</p>
     <p>VIN: {{car.VIN}}</p>
     <p>{{car.mileage}} Miles, ${{car.price}}</p>
+    <app-vehicle-form 
+        *ngIf="vehicleToEdit == car" 
+        [vehicle]="car" 
+        (on-submit)="commitEdit($event)"
+        (on-cancel)="cancelEdit()"
+        >
+    </app-vehicle-form>
     <p>
         <button (click)="deleteVehicle(car)">Delete</button>
+        <button (click)="beginEditing(car)">Edit</button>
     </p>
 </div>
