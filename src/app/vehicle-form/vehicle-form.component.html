@@ -1,20 +1,20 @@
 <p *ngIf="myForm.invalid" class="error">Please enter valid values.</p>
 <form ngForm #myForm="ngForm">
     VIN:<br/>
-    <input type="text" #vin="ngModel" name="veh_vin" minlength="3" required [ngModel]="vehicle.VIN" /><br/>
+    <input type="text" #vin="ngModel" name="veh_vin" minlength="3" required [(ngModel)]="vehicle.VIN" /><br/>
     <span class="error" *ngIf="vin.invalid && vin.dirty">Must be 3 characters</span>
     Year:<br/>
-    <input type="number" name="veh_year" [ngModel]="vehicle.year" /><br/>
+    <input type="number" name="veh_year" [(ngModel)]="vehicle.year" /><br/>
     Make:<br/>
-    <input type="text" name="veh_make" [ngModel]="vehicle.make" /><br/>
+    <input type="text" name="veh_make" [(ngModel)]="vehicle.make" /><br/>
     Model:<br/>
-    <input type="text" name="veh_model" [ngModel]="vehicle.model" /><br/>
+    <input type="text" name="veh_model" [(ngModel)]="vehicle.model" /><br/>
     Mileage:<br/>
-    <input type="number" name="veh_mileage" [ngModel]="vehicle.mileage" /><br/>
+    <input type="number" name="veh_mileage" [(ngModel)]="vehicle.mileage" /><br/>
     Price:<br/>
-    <input type="number" name="veh_price" [ngModel]="vehicle.price" /><br/>
+    <input type="number" name="veh_price" [(ngModel)]="vehicle.price" /><br/>
     <label>
-        <input type="checkbox" name="veh_featured" [ngModel]="vehicle.featured" />
+        <input type="checkbox" name="veh_featured" [(ngModel)]="vehicle.featured" />
         Featured vehicle
     </label>
     <br/>

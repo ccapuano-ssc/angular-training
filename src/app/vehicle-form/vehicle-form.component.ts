@@ -19,21 +19,21 @@ export class VehicleFormComponent {
   vehicle = new Vehicle("", 0, "", "", 0, 0, false, [])
 
   @Input()
-  showCancel = false;
+  showCancel = true;
 
   handleSubmit(nForm:NgForm) {
-    const input = nForm.value
-    const v = new Vehicle(
-      input.veh_vin,
-      input.veh_year,
-      input.veh_make,
-      input.veh_model,
-      input.veh_mileage,
-      input.veh_price,
-      input.veh_featured === "" ? false : input.veh_featured,
-      [])
-  
-    this.emitter.emit(v)
+    // const input = nForm.value
+    // const v = new Vehicle(
+    //   input.veh_vin,
+    //   input.veh_year,
+    //   input.veh_make,
+    //   input.veh_model,
+    //   input.veh_mileage,
+    //   input.veh_price,
+    //   input.veh_featured === "" ? false : input.veh_featured,
+    //   [])
+
+    this.emitter.emit(this.vehicle)
   }
 
   handleCancel()

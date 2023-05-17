@@ -1,7 +1,6 @@
 <div>
     <div>
         <img #img [src]="imageList[currentIndex]"/>
-        <input #imgTest [value]="imageList[currentIndex]" />
     </div>
     <div>
         <button [disabled]="currentIndex==0"  (click)="movePrevious()">Previous</button>
