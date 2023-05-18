@@ -1,7 +1,7 @@
 <form [formGroup]="vehicleForm">
     VIN:<br />
     <input type="text" formControlName="veh_vin" />
-    <span class="error" *ngIf="vehicleForm.get('veh_vin')?.invalid && vehicleForm. get('veh_vin')?.dirty">Must be 3 characters</span>
+    <span class="error" *ngIf="showVinWarning()">Must be minimum 3 characters. I, O and Q not allowed.</span>
     <br />
     Year:<br />
     <input type="text" formControlName="veh_year"/><br />
