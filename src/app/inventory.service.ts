@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Vehicle } from './vehicle';
 
+export interface IInventoryService {
+  getInventory(): Vehicle[];
+  addVehicle(v:Vehicle) : void;
+  updateVehicle(oldVIN: string, newVehicle: Vehicle): void;
+  deleteVehicle(vehicleToDelete:Vehicle) : void;
+}
+
 @Injectable({
   providedIn: 'root'
 })
-export class InventoryService {
+export class InventoryService implements IInventoryService {
   getInventory(): Vehicle[] {
     return this.inventory;
 
   }
-  
+
   private inventory: Vehicle[] = []
   constructor() { 
 
