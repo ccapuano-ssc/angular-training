@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Vehicle } from './vehicle';
 
 export interface IInventoryService {
-  getInventory(): Vehicle[];
+  getInventory():  Observable<Vehicle[]>;
   addVehicle(v:Vehicle) : void;
   updateVehicle(oldVIN: string, newVehicle: Vehicle): void;
   deleteVehicle(vehicleToDelete:Vehicle) : void;
@@ -12,13 +14,12 @@ export interface IInventoryService {
   providedIn: 'root'
 })
 export class InventoryService implements IInventoryService {
-  getInventory(): Vehicle[] {
-    return this.inventory;
-
-  }
+  
 
   private inventory: Vehicle[] = []
-  constructor() { 
+  private baseURL = "http://localhost:3000/vehicle"
+
+  constructor(private httpClient:HttpClient) { 
 
       this.inventory = [
         {
@@ -66,20 +67,20 @@ export class InventoryService implements IInventoryService {
 
   }
 
-  public addVehicle(v:Vehicle) {
-    this.inventory.push(v)
+  getInventory(): Observable<Vehicle[]> {
+    return this.httpClient.get<Vehicle[]>(`${this.baseURL}`)
   }
   
-  public updateVehicle(oldVIN:string, newVehicle:Vehicle) {
-    const oldVehicle = this.inventory.find(
-      v => v.VIN === oldVIN)
-  
-    if (oldVehicle != undefined) {
-      Object.assign(oldVehicle, newVehicle)
-    }
+  public addVehicle(v:Vehicle): Observable<any> {
+    return this.httpClient.post(`${this.baseURL}`, v)
   }
   
-  public deleteVehicle(vehicleToDelete:Vehicle) {
-    this.inventory = this.inventory.filter(v => v.VIN !== vehicleToDelete.VIN)
+  public updateVehicle(vin:string, v:Vehicle): Observable<any> {
+    return this.httpClient.put(`${this.baseURL}/${vin}`, v)
+  }
+  
+  public deleteVehicle(v:Vehicle): Observable<any> {
+    return this.httpClient.delete(
+      `${this.baseURL}/${v.VIN}`)
   }
 }

@@ -22,10 +22,11 @@ export class DealerInventoryComponent implements OnInit {
 
   commitEdit(v:Vehicle) {
     //Copy the edited data
-    this.inventorySvc.updateVehicle(this.vehicleToEdit!.VIN, v);
-    this.inventory = this.inventorySvc.getInventory();
-  
+    this.inventorySvc.updateVehicle(this.vehicleToEdit!.VIN, v)
+    .subscribe(() => {
+      Object.assign(this.vehicleToEdit!, v)
     this.vehicleToEdit = undefined
+  })
   }
 
   cancelEdit()
@@ -34,8 +35,10 @@ export class DealerInventoryComponent implements OnInit {
   }
 
   deleteVehicle(car:Vehicle) {
-    this.inventorySvc.deleteVehicle(car);
-    this.inventory = this.inventorySvc.getInventory();
+    this.inventorySvc.deleteVehicle(car).subscribe(() => {
+      //Update local copy of the list
+      this.inventory = this.inventory.filter(v => v.VIN !== car.VIN)
+    })
   }
   
   trackByVIN(index:number, car:Vehicle) : string {
@@ -44,7 +47,8 @@ export class DealerInventoryComponent implements OnInit {
 
   ngOnInit(): void {
     //throw new Error('Method not implemented.');
-    this.inventory = this.inventorySvc.getInventory();
+    this.inventorySvc.getInventory()
+    .subscribe(list => this.inventory = list)
   }
 
   handlePhotoNavigation(photoIndex:number, car:Vehicle) {
@@ -54,7 +58,9 @@ export class DealerInventoryComponent implements OnInit {
   }
 
   addVehicle(v:Vehicle) {
-    this.inventorySvc.addVehicle(v);
+    this.inventorySvc.addVehicle(v).subscribe(() => {
+      this.inventory.push(v)
+    })
     
   }
   
